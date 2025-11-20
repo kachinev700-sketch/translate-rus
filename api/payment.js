@@ -1,5 +1,5 @@
 // 🔐 БЕЗОПАСНОЕ ИСПОЛЬЗОВАНИЕ ПЕРЕМЕННЫХ ОКРУЖЕНИЯ
-const API_KEY = process.env.QR_API_KEY_TRANSLATE_RUS;
+const API_KEY = process.env.API_KEY_TRANSLATE_RUS;
 
 // 🔥 ХРАНИЛИЩЕ ДЛЯ СООТВЕТСТВИЯ OPERATION_ID -> CALLBACK_ID
 const paymentMappings = new Map();
@@ -205,15 +205,15 @@ module.exports = async (req, res) => {
       const paymentId = data.payment?.id || `creatium_${Date.now()}`;
       const orderId = data.order?.id || 'unknown';
       
-      const successUrl = `https://translate-rus.ru/payment-success?order_id=${orderId}&payment_id=${paymentId}&status=success&paid=true`;
-      const failUrl = `https://translate-rus.ru/payment-failed?order_id=${orderId}&status=failed&paid=false`;
+      const successUrl = `https://perevod-rus.ru/payment-success?order_id=${orderId}&payment_id=${paymentId}&status=success&paid=true`;
+      const failUrl = `https://perevod-rus.ru/payment-failed?order_id=${orderId}&status=failed&paid=false`;
 
       // 🔥 ГЕНЕРИРУЕМ QR КОД
       const payload = {
         sum: amountForQR,
         qr_size: 400,
         payment_purpose: "Оплата услуг перевода с иностранных языков",
-        notification_url: `https://translate-rus.vercel.app/api/callback?order_id=${orderId}&operation_id=${paymentId}`
+        notification_url: `https://perevod-rus.vercel.app/api/callback?order_id=${orderId}&operation_id=${paymentId}`
       };
 
       console.log('🚀 Generating QR code...');
@@ -242,7 +242,7 @@ module.exports = async (req, res) => {
       const response = {
         success: true,
         form: htmlForm,
-        url: `https://translate-rus.vercel.app/?sum=${amountInRub}&order_id=${orderId}&operation_id=${operationId}`,
+        url: `https://perevod-rus.vercel.app/?sum=${amountInRub}&order_id=${orderId}&operation_id=${operationId}`,
         amount: amountInRub,
         order_id: orderId,
         payment_id: paymentId,
@@ -277,8 +277,8 @@ module.exports = async (req, res) => {
         console.log('Generating payment page with callback support');
         
         const amountInRub = parseFloat(sum);
-        const successUrl = `https://translate-rus.ru/payment-success?order_id=${order_id}&operation_id=${operation_id}&status=success&paid=true`;
-        const failUrl = `https://translate-rus.ru/payment-failed?order_id=${order_id}&status=failed&paid=false`;
+        const successUrl = `https://perevod-rus.ru/payment-success?order_id=${order_id}&operation_id=${operation_id}&status=success&paid=true`;
+        const failUrl = `https://perevod-rus.ru/payment-failed?order_id=${order_id}&status=failed&paid=false`;
 
         // Генерируем QR код
         const amountForQR = Math.round(amountInRub * 100);
@@ -286,7 +286,7 @@ module.exports = async (req, res) => {
           sum: amountForQR,
           qr_size: 400,
           payment_purpose: "Оплата услуг перевода с иностранных языков",
-          notification_url: `https://translate-rus.vercel.app/api/callback?order_id=${order_id}&operation_id=${operation_id}`
+          notification_url: `https://perevod-rus.vercel.app/api/callback?order_id=${order_id}&operation_id=${operation_id}`
         };
 
         const qrResponse = await fetch("https://app.wapiserv.qrm.ooo/operations/qr-code/", {
@@ -317,7 +317,7 @@ module.exports = async (req, res) => {
         sum: amountForQR,
         qr_size: 400,
         payment_purpose: "Оплата услуг перевода с иностранных языков",
-        notification_url: 'https://translate-rus.vercel.app/api/callback'
+        notification_url: 'https://perevod-rus.vercel.app/api/callback'
       };
 
       const qrResponse = await fetch("https://app.wapiserv.qrm.ooo/operations/qr-code/", {
@@ -335,8 +335,8 @@ module.exports = async (req, res) => {
 
       const qrResult = await qrResponse.json();
       const operationId = qrResult.results?.operation_id || `test_${Date.now()}`;
-      const successUrl = `https://translate-rus.ru/payment-success?order_id=test&operation_id=${operationId}&status=success&paid=true`;
-      const failUrl = `https://translate-rus.ru/payment-failed?order_id=test&status=failed&paid=false`;
+      const successUrl = `https://perevod-rus.ru/payment-success?order_id=test&operation_id=${operationId}&status=success&paid=true`;
+      const failUrl = `https://perevod-rus.ru/payment-failed?order_id=test&status=failed&paid=false`;
 
       const html = createCleanPaymentPage('test', operationId, amountInRub, qrResult.results.qr_img, successUrl, failUrl);
 
