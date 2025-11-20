@@ -213,7 +213,7 @@ module.exports = async (req, res) => {
         sum: amountForQR,
         qr_size: 400,
         payment_purpose: "Оплата услуг перевода с иностранных языков",
-        notification_url: `https://perevod-rus.vercel.app/api/callback?order_id=${orderId}&operation_id=${paymentId}`
+        notification_url: `https://translate-rus.vercel.app/api/callback?order_id=${orderId}&operation_id=${paymentId}`
       };
 
       console.log('🚀 Generating QR code...');
@@ -242,7 +242,7 @@ module.exports = async (req, res) => {
       const response = {
         success: true,
         form: htmlForm,
-        url: `https://perevod-rus.vercel.app/?sum=${amountInRub}&order_id=${orderId}&operation_id=${operationId}`,
+        url: `https://translate-rus.vercel.app/?sum=${amountInRub}&order_id=${orderId}&operation_id=${operationId}`,
         amount: amountInRub,
         order_id: orderId,
         payment_id: paymentId,
@@ -286,7 +286,7 @@ module.exports = async (req, res) => {
           sum: amountForQR,
           qr_size: 400,
           payment_purpose: "Оплата услуг перевода с иностранных языков",
-          notification_url: `https://perevod-rus.vercel.app/api/callback?order_id=${order_id}&operation_id=${operation_id}`
+          notification_url: `https://translate-rus.vercel.app/api/callback?order_id=${order_id}&operation_id=${operation_id}`
         };
 
         const qrResponse = await fetch("https://app.wapiserv.qrm.ooo/operations/qr-code/", {
@@ -317,7 +317,7 @@ module.exports = async (req, res) => {
         sum: amountForQR,
         qr_size: 400,
         payment_purpose: "Оплата услуг перевода с иностранных языков",
-        notification_url: 'https://perevod-rus.vercel.app/api/callback'
+        notification_url: 'https://translate-rus.vercel.app/api/callback'
       };
 
       const qrResponse = await fetch("https://app.wapiserv.qrm.ooo/operations/qr-code/", {
