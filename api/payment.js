@@ -1,5 +1,5 @@
 // 🔐 БЕЗОПАСНОЕ ИСПОЛЬЗОВАНИЕ ПЕРЕМЕННЫХ ОКРУЖЕНИЯ
-const API_KEY = process.env.API_KEY_TRANSLATE_RUS;
+const API_KEY = process.env.QR_API_KEY_TRANSLATE_RUS;
 
 // 🔥 ХРАНИЛИЩЕ ДЛЯ СООТВЕТСТВИЯ OPERATION_ID -> CALLBACK_ID
 const paymentMappings = new Map();
