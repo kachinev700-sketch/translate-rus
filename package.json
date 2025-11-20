@@ -1,0 +1,8 @@
+{
+  "name": "creatium-qr",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node api/payment.js"
+  },
+  "dependencies": {}
+}
